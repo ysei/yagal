@@ -1,8 +1,9 @@
-#include <QCoreApplication>
+#include "ga.h"
 
 int main(int argc, char * argv[])
 {
-	QCoreApplication a(argc, argv);
-	
-	return a.exec();
+    Domain * domain = new Domain;
+    Space * space = new Space(domain);
+    Solver * solver = new Solver(space);
+    return 0;
 }

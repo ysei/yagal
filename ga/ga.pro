@@ -11,7 +11,7 @@ SOURCES += main.cpp \
 TARGET = ../bin/ga 
 
 HEADERS += \
-    ga.h \
     domain.h \
     space.h \
-    solver.h
+    solver.h \
+    yagal.h

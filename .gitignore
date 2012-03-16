@@ -1,0 +1,4 @@
+bin/ga
+Makefile
+*.o
+moc_*.cpp

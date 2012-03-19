@@ -1,4 +1,4 @@
 CONFIG += ordered
 TEMPLATE = subdirs
 
-SUBDIRS = ga
+SUBDIRS = ga gatest

@@ -4,19 +4,6 @@
 #include <vector>
 #include "solution.h"
 
-template <class T>
-struct RandomInitializer
-{
-    virtual T operator ()();
-};
-
-template <class T>
-struct Initializer
-{
-
-    virtual T operator ()();
-};
-
 class Domain
 {
 public:
@@ -25,11 +12,6 @@ public:
 
     template <class T>
     void add() {
-
-    }
-
-    template <class T>
-    void add(const RandomInitializer * initializer) {
 
     }
 
@@ -56,7 +38,7 @@ public:
 
 private:
     std::vector<unsigned int> m_valueOffsets;
-    std::vector<RandomInitializer *> m_initializers;
+    // std::vector<RandomInitializer *> m_initializers;
 
     unsigned int m_bits;
 };

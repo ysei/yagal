@@ -1,3 +1,4 @@
+gatest/gatest
 *.*.user
 bin/ga
 Makefile

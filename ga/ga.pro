@@ -15,6 +15,7 @@ HEADERS += \
     space.h \
     solver.h \
     yagal.h \
-    solution.h
+    solution.h \
+    range.h
 
 CXXFLAGS += -Wunused-parameter

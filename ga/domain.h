@@ -4,6 +4,23 @@
 #include <vector>
 #include "solution.h"
 
+struct Initializer
+{
+    virtual void initialize(void * ptr)
+    {
+
+    }
+};
+
+template <class T>
+struct RandomInitializer : public Initializer
+{
+    virtual void initialize(T * ptr)
+    {
+
+    }
+};
+
 class Domain
 {
 public:
@@ -38,7 +55,7 @@ public:
 
 private:
     std::vector<unsigned int> m_valueOffsets;
-    // std::vector<RandomInitializer *> m_initializers;
+    std::vector<Initializer *> m_initializers;
 
     unsigned int m_bits;
 };

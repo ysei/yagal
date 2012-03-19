@@ -43,5 +43,7 @@ unsigned int Domain::solutionSize() const
 
 void Domain::initialize(Solution solution) const
 {
+    for(int i = 0; i < m_initializers.size(); i++) {
 
+    }
 }

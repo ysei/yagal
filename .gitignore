@@ -1,3 +1,4 @@
+*.a
 gatest/gatest
 *.*.user
 bin/ga

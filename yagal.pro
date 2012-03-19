@@ -1,4 +1,4 @@
 CONFIG += ordered
 TEMPLATE = subdirs
 
-SUBDIRS = ga gatest
+SUBDIRS = RandomLib ga gatest

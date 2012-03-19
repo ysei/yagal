@@ -14,4 +14,7 @@ HEADERS += \
     domain.h \
     space.h \
     solver.h \
-    yagal.h
+    yagal.h \
+    solution.h
+
+CXXFLAGS += -Wunused-parameter

@@ -1,6 +1,7 @@
 #include "domain.h"
+#include "solution.h"
 
-Domain::Domain()
+Domain::Domain() : m_bits(0)
 {
 
 }
@@ -15,32 +16,32 @@ void Domain::addFloat()
 
 }
 
-void Domain::addFloat(float min, float max)
-{
-
-}
-
 void Domain::addInt()
 {
 
 }
 
-void Domain::addInt(int min, int max)
+float Domain::getFloat(int index, const Solution &solution) const
 {
-
+    return 0.0f;
 }
 
-float Domain::getFloat(int index)
+int Domain::getInt(int index, const Solution &solution) const
 {
-
+    return 0;
 }
 
-int Domain::getInt(int index)
+unsigned Domain::bitsCount() const
 {
-
+    return m_bits;
 }
 
-unsigned Domain::bitCount() const
+unsigned int Domain::solutionSize() const
+{
+    return m_bits / 8;
+}
+
+void Domain::initialize(Solution solution) const
 {
 
 }

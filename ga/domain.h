@@ -30,8 +30,8 @@ public:
 
     template <class T>
     void add() {
-        m_bits += sizeof(T) * 8;
-        m_valueOffsets.push_back(sizeof(T));
+        m_solutionSize += sizeof(T);
+        m_valueOffsets.push_back(m_solutionSize);
     }
 
     template <class T>
@@ -53,7 +53,7 @@ private:
     std::vector<unsigned int> m_valueOffsets;
     std::vector<Initializer *> m_initializers;
 
-    unsigned int m_bits;
+    unsigned int m_solutionSize;
 };
 
 #endif // DOMAIN_H

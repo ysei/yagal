@@ -34,3 +34,5 @@ HEADERS += ExactExponential.hpp \
 	RandomType.hpp
 	
 SOURCES += Random.cpp
+
+QMAKE_CXXFLAGS = -msse2

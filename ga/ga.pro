@@ -11,6 +11,7 @@ SOURCES += domain.cpp \
     solver.cpp \
     random.cpp
 
+
 TARGET = ../lib/yagal
 
 HEADERS += \
@@ -21,4 +22,5 @@ HEADERS += \
     solution.h \
     range.h \
     random.h \
-    types.h
+    types.h \
+    domain.inl

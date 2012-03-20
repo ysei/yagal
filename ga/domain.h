@@ -17,7 +17,7 @@ struct Initializer
 template <class T>
 struct RandomInitializer : public Initializer
 {
-    virtual void initialize(T * ptr)
+    virtual void initialize(void * ptr)
     {
         UNUSED(ptr);
     }
@@ -30,26 +30,13 @@ public:
     virtual ~Domain();
 
     template <class T>
-    void add() {
-        add<T>(new RandomInitializer<T>);
-    }
+    void add();
 
     template <class T>
-    void add(Initializer * initializer) {
-        m_solutionSize += sizeof(T);
-        m_valueOffsets.push_back(m_solutionSize);
-        m_initializers.push_back(initializer);
-    }
+    void add(Initializer * initializer);
 
     template <class T>
-    T get(unsigned int index, const byte* solution) {
-        assert(index >= 0);
-        assert(solution);
-
-        unsigned int offsetInSolution = m_valueOffsets[index];
-
-        return *((T *)(solution + offsetInSolution));
-    }
+    T get(unsigned int index, const byte* solution);
 
     unsigned bitsCount() const;
     unsigned int solutionSize() const;
@@ -65,5 +52,7 @@ private:
 
     unsigned int m_solutionSize;
 };
+
+#include "domain.inl"
 
 #endif // DOMAIN_H

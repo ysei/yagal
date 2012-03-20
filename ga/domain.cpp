@@ -11,17 +11,6 @@ Domain::~Domain()
 
 }
 
-void Domain::addFloat()
-{
-
-}
-
-void Domain::addInt()
-{
-    m_bits += sizeof(int) * 8;
-    m_valueOffsets.push_back(m_bits);
-}
-
 float Domain::getFloat(int index, const Solution &solution) const
 {
     return 0.0f;

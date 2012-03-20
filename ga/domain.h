@@ -29,11 +29,9 @@ public:
 
     template <class T>
     void add() {
-
+        m_bits += sizeof(T) * 8;
+        m_valueOffsets.push_back(m_bits);
     }
-
-    void addFloat();
-    void addInt();
 
     template <class T>
     void addArray(int length) {

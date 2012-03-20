@@ -6,7 +6,7 @@
 #include <stdio.h>
 TEST(DomainTest, addIntTest) {
     Domain domain;
-    domain.addInt();
+    domain.add<int>();
 
     EXPECT_EQ(sizeof(int), domain.solutionSize());
     EXPECT_EQ(sizeof(int) * 8, domain.bitsCount());
@@ -14,11 +14,19 @@ TEST(DomainTest, addIntTest) {
 
 TEST(DomainTest, add2IntsTest) {
     Domain domain;
-    domain.addInt();
-    domain.addInt();
+    domain.add<int>();
+    domain.add<int>();
 
     EXPECT_EQ(2 * sizeof(int), domain.solutionSize());
     EXPECT_EQ(2 * sizeof(int) * 8, domain.bitsCount());
+}
+
+TEST(DomainTest, addFloatTest) {
+    Domain domain;
+    domain.add<float>();
+
+    EXPECT_EQ(sizeof(float), domain.solutionSize());
+    EXPECT_EQ(sizeof(float) * 8, domain.bitsCount());
 }
 
 #endif // DOMAIN_TEST_H

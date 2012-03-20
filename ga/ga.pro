@@ -1,17 +1,17 @@
 QT -= gui
-CONFIG += console
+CONFIG += console static
 CONFIG -= app_bundle
 
-TEMPLATE = app
+TEMPLATE = lib
 
 INCLUDEPATH = ..
 
-SOURCES += main.cpp \
-    domain.cpp \
+SOURCES += domain.cpp \
     space.cpp \
     solver.cpp \
     random.cpp
-TARGET = ../bin/ga
+
+TARGET = ../lib/yagal
 
 HEADERS += \
     domain.h \
@@ -21,5 +21,3 @@ HEADERS += \
     solution.h \
     range.h \
     random.h
-
-CXXFLAGS += -Wunused-parameter

@@ -1,5 +1,6 @@
 #include "gtest/gtest.h"
 #include "range_test.h"
+#include "domain_test.h"
 
 int main(int argc, char ** argv)
 {

@@ -1,6 +1,7 @@
 #ifndef DOMAIN_H
 #define DOMAIN_H
 
+#include <assert.h>
 #include <vector>
 #include "solution.h"
 
@@ -30,7 +31,17 @@ public:
     template <class T>
     void add() {
         m_bits += sizeof(T) * 8;
-        m_valueOffsets.push_back(m_bits);
+        m_valueOffsets.push_back(sizeof(T));
+    }
+
+    template <class T>
+    T get(unsigned int index, const Solution& solution) {
+        assert(index >= 0);
+        assert(solution);
+
+        unsigned int offsetInSolution = m_valueOffsets[index];
+        char * solutionVector = (char *) solution;
+        return *((T *)(solutionVector + offsetInSolution));
     }
 
     template <class T>

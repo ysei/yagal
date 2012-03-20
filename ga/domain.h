@@ -35,19 +35,19 @@ public:
     }
 
     template <class T>
-    T get(unsigned int index, const Solution& solution) {
+    T get(unsigned int index, const byte* solution) {
         assert(index >= 0);
         assert(solution);
 
         unsigned int offsetInSolution = m_valueOffsets[index];
-        char * solutionVector = (char *) solution;
-        return *((T *)(solutionVector + offsetInSolution));
+
+        return *((T *)((byte*)solution + offsetInSolution));
     }
 
     unsigned bitsCount() const;
     unsigned int solutionSize() const;
 
-    void initialize(Solution solution) const;
+    void initialize(const byte * solution) const;
 
 private:
     std::vector<unsigned int> m_valueOffsets;

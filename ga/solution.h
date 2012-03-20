@@ -1,6 +1,6 @@
 #ifndef SOLUTION_H
 #define SOLUTION_H
 
-typedef void * Solution;
+typedef unsigned char byte;
 
 #endif // SOLUTION_H

@@ -10,7 +10,7 @@ class Fitness
 {
 public:
     virtual ~Fitness() {}
-    virtual float calculateFitness(const Domain& domain, const Solution& solution) = 0;
+    virtual float calculateFitness(const Domain& domain, const byte * solution) = 0;
 };
 
 class Solver

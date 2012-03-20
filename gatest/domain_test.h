@@ -49,7 +49,7 @@ TEST(DomainTest, getIntTest) {
     Domain domain;
     domain.add<int>();
 
-    EXPECT_EQ(546, domain.get<int>(0, (Solution)&sol));
+    EXPECT_EQ(546, domain.get<int>(0, (byte *)&sol));
 }
 
 struct TwoIntsSolution {
@@ -66,8 +66,8 @@ TEST(DomainTest, get2IntsTest) {
     domain.add<int>();
     domain.add<int>();
 
-    EXPECT_EQ(7648, domain.get<int>(0, (Solution)&sol));
-    EXPECT_EQ(-1454, domain.get<int>(1, (Solution)&sol));
+    EXPECT_EQ(7648, domain.get<int>(0, (byte *)&sol));
+    EXPECT_EQ(-1454, domain.get<int>(1, (byte *)&sol));
 }
 
 struct OneIntAndFloatSolution {
@@ -84,8 +84,8 @@ TEST(DomainTest, getOneIntAndFloatTest) {
     domain.add<int>();
     domain.add<float>();
 
-    EXPECT_EQ(3945, domain.get<int>(0, (Solution)&sol));
-    EXPECT_EQ(-40.195f, domain.get<float>(1, (Solution)&sol));
+    EXPECT_EQ(3945, domain.get<int>(0, (byte *)&sol));
+    EXPECT_EQ(-40.195f, domain.get<float>(1, (byte *)&sol));
 }
 
 #endif // DOMAIN_TEST_H

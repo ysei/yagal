@@ -21,7 +21,7 @@ unsigned int Domain::solutionSize() const
     return m_solutionSize;
 }
 
-void Domain::initialize(Solution solution) const
+void Domain::initialize(const byte *solution) const
 {
     for(int i = 0; i < m_initializers.size(); i++) {
 

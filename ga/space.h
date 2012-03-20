@@ -32,7 +32,7 @@ public:
       */
     unsigned int size() const;
 
-    Solution solutionAt(unsigned int index);
+    const byte * solutionAt(unsigned int index);
 
 private:
     void createSolutions();
@@ -41,7 +41,7 @@ private:
 private:
     const Domain * m_domain;
     unsigned int m_size;
-    void * m_solutions;
+    byte * m_solutions;
 };
 
 #endif // SPACE_H

@@ -29,12 +29,12 @@ unsigned int Space::size() const
     return m_size;
 }
 
-Solution Space::solutionAt(unsigned int index)
+const byte *Space::solutionAt(unsigned int index)
 {
     assert(m_solutions);
     assert(index < m_size);
 
-    return (Solution)((char *)m_solutions + index * m_domain->solutionSize());
+    return (byte *)(m_solutions + index * m_domain->solutionSize());
 }
 
 void Space::createSolutions()
@@ -46,14 +46,14 @@ void Space::createSolutions()
         free(m_solutions);
     }
 
-    m_solutions = malloc(size() * m_domain->solutionSize());
+    m_solutions = (byte *)malloc(size() * m_domain->solutionSize());
 }
 
 void Space::initializeSolutions()
 {
     unsigned int solutionSize = m_domain->solutionSize();
     for(int i = 0; i < size(); i++) {
-        Solution solution = solutionAt(i);
+        const byte * solution = solutionAt(i);
         m_domain->initialize(solution);
     }
 }

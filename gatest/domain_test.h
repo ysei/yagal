@@ -113,4 +113,19 @@ TEST(DomainTest, initializeOneInt) {
     EXPECT_EQ(123, sol.n);
 }
 
+TEST(DomainTest, initializeIntAndFloat) {
+    OneIntAndFloatSolution sol;
+    sol.n = 0;
+    sol.m = 0;
+
+    Domain domain;
+    domain.add<int>(new ValueInitializer<int>(324));
+    domain.add<float>(new ValueInitializer<float>(40.2354f));
+
+    domain.initialize((byte *)&sol);
+
+    EXPECT_EQ(324, sol.n);
+    EXPECT_EQ(40.2354f, sol.m);
+}
+
 #endif // DOMAIN_TEST_H

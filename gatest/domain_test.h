@@ -29,4 +29,13 @@ TEST(DomainTest, addFloatTest) {
     EXPECT_EQ(sizeof(float) * 8, domain.bitsCount());
 }
 
+TEST(DomainTest, addIntAndFloatTest) {
+    Domain domain;
+    domain.add<int>();
+    domain.add<float>();
+
+    EXPECT_EQ(sizeof(float) + sizeof(int), domain.solutionSize());
+    EXPECT_EQ((sizeof(float) + sizeof(int)) * 8, domain.bitsCount());
+}
+
 #endif // DOMAIN_TEST_H

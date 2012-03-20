@@ -44,19 +44,6 @@ public:
         return *((T *)(solutionVector + offsetInSolution));
     }
 
-    template <class T>
-    void addArray(int length) {
-
-    }
-
-    float getFloat(int index, const Solution& solution) const;
-    int getInt(int index, const Solution& solution) const;
-
-    template <class T>
-    T * getArray(int index, const Solution& solution) const {
-
-    }
-
     unsigned bitsCount() const;
     unsigned int solutionSize() const;
 

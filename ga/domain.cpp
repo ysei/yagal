@@ -11,24 +11,6 @@ Domain::~Domain()
 
 }
 
-float Domain::getFloat(int index, const Solution &solution) const
-{
-    if(index == 0) {
-        return *((float *)solution);
-    }
-
-    return 0.0f;
-}
-
-int Domain::getInt(int index, const Solution &solution) const
-{
-    if(index == 0) {
-        return *((int *)solution);
-    }
-
-    return 0;
-}
-
 unsigned Domain::bitsCount() const
 {
     return m_bits;

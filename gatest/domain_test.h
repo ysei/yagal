@@ -70,4 +70,22 @@ TEST(DomainTest, get2IntsTest) {
     EXPECT_EQ(-1454, domain.get<int>(1, (Solution)&sol));
 }
 
+struct OneIntAndFloatSolution {
+    int n;
+    float m;
+};
+
+TEST(DomainTest, getOneIntAndFloatTest) {
+    OneIntAndFloatSolution sol;
+    sol.n = 3945;
+    sol.m = -40.195f;
+
+    Domain domain;
+    domain.add<int>();
+    domain.add<float>();
+
+    EXPECT_EQ(3945, domain.get<int>(0, (Solution)&sol));
+    EXPECT_EQ(-40.195f, domain.get<float>(1, (Solution)&sol));
+}
+
 #endif // DOMAIN_TEST_H

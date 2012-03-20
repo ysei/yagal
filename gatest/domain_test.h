@@ -88,4 +88,29 @@ TEST(DomainTest, getOneIntAndFloatTest) {
     EXPECT_EQ(-40.195f, domain.get<float>(1, (byte *)&sol));
 }
 
+template <class T>
+struct ValueInitializer : public Initializer
+{
+    ValueInitializer(T v) : value(v) {}
+
+    virtual void initialize(void * ptr) {
+        T * p = (T *) ptr;
+        *p = value;
+    }
+
+    T value;
+};
+
+TEST(DomainTest, initializeOneInt) {
+    OneIntSolution sol;
+    sol.n = 0;
+
+    Domain domain;
+    domain.add<int>(new ValueInitializer<int>(123));
+
+    domain.initialize((byte *)&sol);
+
+    EXPECT_EQ(123, sol.n);
+}
+
 #endif // DOMAIN_TEST_H

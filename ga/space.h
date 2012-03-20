@@ -32,7 +32,7 @@ public:
       */
     unsigned int size() const;
 
-    const byte * solutionAt(unsigned int index);
+    byte *solutionAt(unsigned int index);
 
 private:
     void createSolutions();

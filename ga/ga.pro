@@ -20,4 +20,5 @@ HEADERS += \
     yagal.h \
     solution.h \
     range.h \
-    random.h
+    random.h \
+    types.h

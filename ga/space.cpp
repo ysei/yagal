@@ -29,7 +29,7 @@ unsigned int Space::size() const
     return m_size;
 }
 
-const byte *Space::solutionAt(unsigned int index)
+byte *Space::solutionAt(unsigned int index)
 {
     assert(m_solutions);
     assert(index < m_size);
@@ -51,9 +51,9 @@ void Space::createSolutions()
 
 void Space::initializeSolutions()
 {
-    unsigned int solutionSize = m_domain->solutionSize();
-    for(int i = 0; i < size(); i++) {
-        const byte * solution = solutionAt(i);
+    // unsigned int solutionSize = m_domain->solutionSize();
+    for(uint i = 0; i < size(); i++) {
+        byte * solution = solutionAt(i);
         m_domain->initialize(solution);
     }
 }

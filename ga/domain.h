@@ -41,7 +41,7 @@ public:
 
         unsigned int offsetInSolution = m_valueOffsets[index];
 
-        return *((T *)((byte*)solution + offsetInSolution));
+        return *((T *)(solution + offsetInSolution));
     }
 
     unsigned bitsCount() const;

@@ -9,6 +9,7 @@ INCLUDEPATH = ..
 
 HEADERS += range_test.h \
     domain_test.h \
-    space_test.h
+    space_test.h \
+    common.h
 
 LIBS += -L ../lib -lyagal -lRandomLib

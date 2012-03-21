@@ -4,6 +4,7 @@
 #include "../ga/domain.h"
 #include "gtest/gtest.h"
 #include "RandomLib/Random.hpp"
+#include "common.h"
 
 TEST(DomainTest, addIntTest) {
     Domain domain;
@@ -39,10 +40,6 @@ TEST(DomainTest, addIntAndFloatTest) {
     EXPECT_EQ((sizeof(float) + sizeof(int)) * 8, domain.bitsCount());
 }
 
-struct OneIntSolution {
-    int n;
-};
-
 TEST(DomainTest, getIntTest) {
     OneIntSolution sol;
     sol.n = 546;
@@ -52,11 +49,6 @@ TEST(DomainTest, getIntTest) {
 
     EXPECT_EQ(546, domain.get<int>(0, (byte *)&sol));
 }
-
-struct TwoIntsSolution {
-    int n;
-    int m;
-};
 
 TEST(DomainTest, get2IntsTest) {
     TwoIntsSolution sol;
@@ -71,11 +63,6 @@ TEST(DomainTest, get2IntsTest) {
     EXPECT_EQ(-1454, domain.get<int>(1, (byte *)&sol));
 }
 
-struct OneIntAndFloatSolution {
-    int n;
-    float m;
-};
-
 TEST(DomainTest, getOneIntAndFloatTest) {
     OneIntAndFloatSolution sol;
     sol.n = 3945;
@@ -88,19 +75,6 @@ TEST(DomainTest, getOneIntAndFloatTest) {
     EXPECT_EQ(3945, domain.get<int>(0, (byte *)&sol));
     EXPECT_EQ(-40.195f, domain.get<float>(1, (byte *)&sol));
 }
-
-template <class T>
-struct ValueInitializer : public Initializer
-{
-    ValueInitializer(T v) : value(v) {}
-
-    virtual void initialize(void * ptr) {
-        T * p = (T *) ptr;
-        *p = value;
-    }
-
-    T value;
-};
 
 TEST(DomainTest, initializeOneInt) {
     OneIntSolution sol;

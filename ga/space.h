@@ -22,7 +22,7 @@ public:
       * Sets size of the space, e.g. amount of solutions.
       * Default is 100.
       */
-    void setSize(unsigned int size);
+    void setSize(uint size);
 
     /**
       * Returns size of the space, e.g. amount of solutions.
@@ -30,7 +30,9 @@ public:
       */
     unsigned int size() const;
 
-    byte *solutionAt(unsigned int index);
+    byte *solutionAt(uint index);
+
+    void initialize();
 
 private:
     void createSolutions();

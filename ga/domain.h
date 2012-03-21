@@ -25,7 +25,7 @@ public:
     unsigned bitsCount() const;
     unsigned int solutionSize() const;
 
-    void initialize(byte * solution);
+    void initialize(byte * solution) const;
 
 private:
     void * ptrToComponent(uint index, byte * solution) const;

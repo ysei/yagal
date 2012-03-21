@@ -13,6 +13,9 @@ public:
     T uniformInt();
 
     template <class T>
+    T uniformInt(int min, int max);
+
+    template <class T>
     T uniformReal();
 
 private:
@@ -21,12 +24,22 @@ private:
 
 
 template <class T>
-T Random::uniformInt() {
+T Random::uniformInt()
+{
     return m_randomImpl.Integer();
 }
 
+
 template <class T>
-T Random::uniformReal() {
+T Random::uniformInt(int min, int max)
+{
+    m_randomImpl.IntegerC(min, max);
+}
+
+
+template <class T>
+T Random::uniformReal()
+{
     return m_randomImpl.Float();
 }
 

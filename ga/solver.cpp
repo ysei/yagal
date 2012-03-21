@@ -1,7 +1,9 @@
 #include <cstdlib>
 #include "types.h"
+#include "domain.h"
 #include "space.h"
 #include "solver.h"
+#include "random.h"
 
 static int compareScores(const void * a, const void * b)
 {
@@ -20,7 +22,7 @@ Solver::Solver(Space * space) : m_space(space), m_scores(NULL),
     m_mutationProbability(0.01f), m_crossoverProbability(0.8f),
     m_acceptableError(0.001f), m_iterations(1000)
 {
-
+    m_random = new Random;
 }
 
 Solver::~Solver()
@@ -28,6 +30,8 @@ Solver::~Solver()
     if(m_scores) {
         free(m_scores);
     }
+
+    delete m_random;
 }
 
 void Solver::setMutationProbability(float probability)
@@ -84,9 +88,35 @@ void Solver::step(const Fitness &fitness)
 {
     calculateFitness(fitness);
     sortScores();
+    performCrossover();
+    performMutation();
 }
 
 void Solver::sortScores()
 {
     ::qsort(m_scores, m_space->size(), sizeof(SolutionScore), compareScores);
+}
+
+void Solver::performCrossover()
+{
+    uint solutionSize = m_space->domain()->solutionSize();
+
+    for(uint i = 0; i < m_crossoverProbability * m_space->size(); i += 2) {
+        byte * solutionDad = m_space->solutionAt(i);
+        byte * solutionMom = m_space->solutionAt(i + 1);
+
+        crossover(solutionDad, solutionMom, m_random->uniformInt<uint>(1, solutionSize - 1));
+
+        m_space->domain()->initialize(solutionMom);
+    }
+}
+
+void Solver::performMutation()
+{
+
+}
+
+void Solver::crossover(byte *solutionDad, byte *solutionMom, uint point)
+{
+
 }

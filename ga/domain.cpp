@@ -4,7 +4,7 @@
 
 Domain::Domain() : m_solutionSize(0), m_random(new Random())
 {
-    m_valueOffsets.push_back(0);    
+    m_valueOffsets.push_back(0);
 }
 
 Domain::~Domain()
@@ -22,7 +22,7 @@ unsigned int Domain::solutionSize() const
     return m_solutionSize;
 }
 
-void Domain::initialize(byte *solution)
+void Domain::initialize(byte *solution) const
 {
     for(uint i = 0; i < m_initializers.size(); i++) {
         Initializer * initializer = m_initializers[i];

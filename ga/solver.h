@@ -5,6 +5,7 @@
 
 class Space;
 class Domain;
+class Random;
 
 class Fitness
 {
@@ -44,6 +45,10 @@ protected:
     void calculateFitness(const Fitness &fitness);
     void step(const Fitness & fitness);
     void sortScores();
+    void performCrossover();
+    void performMutation();
+
+    void crossover(byte * solutionDad, byte * solutionMom, uint point);
 
 private:
     Space * m_space;
@@ -54,6 +59,7 @@ private:
     float m_acceptableError;
     uint m_iterations;
     SolverStatistics m_stats;
+    Random * m_random;
 };
 
 #endif // SOLVER_H

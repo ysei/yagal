@@ -4,7 +4,7 @@
 #include "domain.h"
 #include "space.h"
 
-Space::Space(const Domain *domain)
+Space::Space(Domain *domain)
     : m_domain(domain), m_size(100), m_solutions(NULL)
 {
 }
@@ -51,7 +51,6 @@ void Space::createSolutions()
 
 void Space::initializeSolutions()
 {
-    // unsigned int solutionSize = m_domain->solutionSize();
     for(uint i = 0; i < size(); i++) {
         byte * solution = solutionAt(i);
         m_domain->initialize(solution);

@@ -3,6 +3,7 @@
 
 #include "../ga/domain.h"
 #include "gtest/gtest.h"
+#include "RandomLib/Random.hpp"
 
 TEST(DomainTest, addIntTest) {
     Domain domain;
@@ -126,6 +127,20 @@ TEST(DomainTest, initializeIntAndFloat) {
 
     EXPECT_EQ(324, sol.n);
     EXPECT_EQ(40.2354f, sol.m);
+}
+
+TEST(DomainTest, initializeSolutionRandomly) {
+    OneIntAndFloatSolution sol;
+    ::memset(&sol, 0, sizeof(OneIntAndFloatSolution));
+
+    Domain domain;
+    domain.add<int>();
+    domain.add<float>();
+
+    domain.initialize((byte *)&sol);
+
+    EXPECT_NE(0, sol.n);
+    EXPECT_NE(0.0f, sol.m);
 }
 
 #endif // DOMAIN_TEST_H

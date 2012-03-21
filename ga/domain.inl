@@ -15,7 +15,6 @@ void Domain::add(Initializer * initializer) {
 
 template <class T>
 T Domain::get(unsigned int index, const byte* solution) {
-    assert(index >= 0);
     assert(solution);
 
     unsigned int offsetInSolution = m_valueOffsets[index];

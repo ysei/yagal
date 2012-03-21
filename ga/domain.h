@@ -5,22 +5,29 @@
 #include <vector>
 #include "types.h"
 #include "solution.h"
+#include "random.h"
 
-struct Initializer
+class Initializer
 {
-    virtual void initialize(void * ptr)
-    {
-        UNUSED(ptr);
-    }
+public:
+    virtual ~Initializer() {}
+    virtual void initialize(void * ptr) = 0;
 };
 
 template <class T>
-struct RandomInitializer : public Initializer
+class RandomInitializer : public Initializer
 {
-    virtual void initialize(void * ptr)
-    {
-        UNUSED(ptr);
+public:
+    virtual void initialize(void * ptr){
+        uint bytes = sizeof(T);
+        byte * bPtr = (byte *)ptr;
+        for(uint i = 0; i < bytes; i++) {
+            bPtr[i] = m_random.uniformInt<byte>();
+        }
     }
+
+private:
+    Random m_random;
 };
 
 class Domain
@@ -41,7 +48,7 @@ public:
     unsigned bitsCount() const;
     unsigned int solutionSize() const;
 
-    void initialize(byte * solution) const;
+    void initialize(byte * solution);
 
 private:
     void * ptrToComponent(uint index, byte * solution) const;
@@ -51,7 +58,9 @@ private:
     std::vector<Initializer *> m_initializers;
 
     unsigned int m_solutionSize;
+    Random m_random;
 };
+
 
 #include "domain.inl"
 

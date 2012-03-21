@@ -1,3 +1,5 @@
+bin/gatest
+*.dylib
 *.a
 gatest/gatest
 *.*.user

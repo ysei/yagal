@@ -11,7 +11,7 @@ public:
     /**
       * Creates space of solutions for specified domain.
       */
-    Space(const Domain * domain);
+    Space(Domain *domain);
 
     virtual ~Space();
 
@@ -39,7 +39,7 @@ private:
     void initializeSolutions();
 
 private:
-    const Domain * m_domain;
+    Domain * m_domain;
     unsigned int m_size;
     byte * m_solutions;
 };

@@ -1,5 +1,5 @@
 QT -= gui
-CONFIG += console static
+CONFIG += console debug
 CONFIG -= app_bundle
 
 TEMPLATE = lib
@@ -13,6 +13,8 @@ SOURCES += domain.cpp \
 
 
 TARGET = ../lib/yagal
+
+LIBS = -L../lib -lRandomLib
 
 HEADERS += \
     domain.h \

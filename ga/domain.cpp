@@ -1,5 +1,6 @@
 #include "types.h"
 #include "domain.h"
+#include "random.h"
 #include "solution.h"
 
 Domain::Domain() : m_solutionSize(0)
@@ -22,7 +23,7 @@ unsigned int Domain::solutionSize() const
     return m_solutionSize;
 }
 
-void Domain::initialize(byte *solution) const
+void Domain::initialize(byte *solution)
 {
     for(uint i = 0; i < m_initializers.size(); i++) {
         Initializer * initializer = m_initializers[i];

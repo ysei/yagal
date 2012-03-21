@@ -1,16 +1,15 @@
 #include "types.h"
 #include "domain.h"
 #include "random.h"
-#include "solution.h"
 
-Domain::Domain() : m_solutionSize(0)
+Domain::Domain() : m_solutionSize(0), m_random(new Random())
 {
-    m_valueOffsets.push_back(0);
+    m_valueOffsets.push_back(0);    
 }
 
 Domain::~Domain()
 {
-
+    delete m_random;
 }
 
 unsigned Domain::bitsCount() const

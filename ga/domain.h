@@ -1,34 +1,11 @@
 #ifndef DOMAIN_H
 #define DOMAIN_H
 
-#include <assert.h>
 #include <vector>
 #include "types.h"
-#include "solution.h"
-#include "random.h"
 
-class Initializer
-{
-public:
-    virtual ~Initializer() {}
-    virtual void initialize(void * ptr) = 0;
-};
-
-template <class T>
-class RandomInitializer : public Initializer
-{
-public:
-    virtual void initialize(void * ptr){
-        uint bytes = sizeof(T);
-        byte * bPtr = (byte *)ptr;
-        for(uint i = 0; i < bytes; i++) {
-            bPtr[i] = m_random.uniformInt<byte>();
-        }
-    }
-
-private:
-    Random m_random;
-};
+class Initializer;
+class Random;
 
 class Domain
 {
@@ -58,7 +35,7 @@ private:
     std::vector<Initializer *> m_initializers;
 
     unsigned int m_solutionSize;
-    Random m_random;
+    Random * m_random;
 };
 
 

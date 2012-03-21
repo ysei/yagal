@@ -1,8 +1,6 @@
 #ifndef SPACE_H
 #define SPACE_H
 
-#include "solution.h"
-
 class Domain;
 
 class Space

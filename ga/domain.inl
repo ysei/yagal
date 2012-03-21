@@ -1,6 +1,9 @@
 #ifndef DOMAIN_INL
 #define DOMAIN_INL
 
+#include <assert.h>
+#include "initializer.h"
+
 template <class T>
 void Domain::add() {
     add<T>(new RandomInitializer<T>);

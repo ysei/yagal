@@ -21,8 +21,8 @@ HEADERS += \
     space.h \
     solver.h \
     yagal.h \
-    solution.h \
     range.h \
     random.h \
     types.h \
-    domain.inl
+    domain.inl \
+    initializer.h

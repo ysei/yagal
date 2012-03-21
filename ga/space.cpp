@@ -1,6 +1,5 @@
 #include <assert.h>
 
-#include "solution.h"
 #include "domain.h"
 #include "space.h"
 

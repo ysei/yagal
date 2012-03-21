@@ -538,6 +538,7 @@ namespace RandomLib {
     u32::type Check(u64::type v, u32::type e, u32::type m) const;
 
     static result_type SelfTestResult(unsigned k) throw() {
+        (void)k;
       return 0;
     }
 

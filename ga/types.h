@@ -5,5 +5,6 @@
 
 typedef unsigned int uint;
 typedef unsigned char byte;
+typedef unsigned long ulong;
 
 #endif // TYPES_H

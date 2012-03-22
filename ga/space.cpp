@@ -6,14 +6,15 @@
 static const int DEFAULT_SIZE = 100;
 
 Space::Space(Domain *domain)
-    : m_domain(domain), m_solutions(NULL)
+    : m_domain(domain), m_solutions(NULL), m_newSolutions(NULL);
 {
     setSize(DEFAULT_SIZE);
 }
 
 Space::~Space()
 {
-    free(m_solutions);    
+    free(m_solutions);
+    free(m_newSolutions);
 }
 
 const Domain * Space::domain() const
@@ -39,6 +40,14 @@ byte *Space::solutionAt(uint index)
     return (byte *)(m_solutions + index * m_domain->solutionSize());
 }
 
+byte *Space::solutionFromNewSpaceAt(uint index)
+{
+    assert(m_newSolutions);
+    assert(index < m_size);
+
+    return (byte *)(m_newSolutions + index * m_domain->solutionSize());
+}
+
 void Space::initialize()
 {
     createSolutions();
@@ -55,6 +64,12 @@ void Space::createSolutions()
     }
 
     m_solutions = (byte *)malloc(size() * m_domain->solutionSize());
+
+    if(m_newSolutions) {
+        free(m_newSolutions);
+    }
+
+    m_newSolutions = (byte *)malloc(size() * m_domain->solutionSize());
 }
 
 void Space::initializeSolutions()

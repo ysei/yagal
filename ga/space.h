@@ -31,6 +31,7 @@ public:
     unsigned int size() const;
 
     byte *solutionAt(uint index);
+    byte *solutionFromNewSpaceAt(uint index);
 
     void initialize();
 
@@ -42,6 +43,7 @@ private:
     Domain * m_domain;
     unsigned int m_size;
     byte * m_solutions;
+    byte * m_newSolutions;
 };
 
 #endif // SPACE_H

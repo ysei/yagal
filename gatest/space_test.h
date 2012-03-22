@@ -65,4 +65,47 @@ TEST(TestSpace, testPromotion)
     }
 }
 
+TEST(TestSpace, testSwap)
+{
+    Domain domain;
+    domain.add<int>(new ValueInitializer<int>(8));
+
+    Space space(&domain);
+    space.setSize(3);
+    space.initialize();
+
+    OneIntSolution * sol = (OneIntSolution *)space.solutionFromNewSpaceAt(0);
+    sol->n = 123;
+
+    space.swap();
+
+    sol = (OneIntSolution *)space.solutionAt(0);
+    EXPECT_EQ(123, sol->n);
+}
+
+TEST(TestSpace, testPromoteAfterSwap)
+{
+    Domain domain;
+
+    domain.add<int>(new ValueInitializer<int>(8));
+
+    Space space(&domain);
+    space.setSize(3);
+    space.initialize();
+
+    for(int i = 0; i < 3; i++) {
+        space.promoteSolution(i);
+    }
+
+    space.swap();
+
+    OneIntSolution * sol = (OneIntSolution *)space.solutionAt(0);
+    sol->n = 314;
+    space.promoteSolution(0);
+
+    sol = (OneIntSolution *)space.solutionFromNewSpaceAt(0);
+
+    EXPECT_EQ(314, sol->n);
+}
+
 #endif // SPACE_TEST_H

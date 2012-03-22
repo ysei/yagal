@@ -36,6 +36,7 @@ public:
     void initialize();
 
     void promoteSolution(uint index);
+    void swap();
 
 private:
     void createSolutions();

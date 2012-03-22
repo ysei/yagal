@@ -57,11 +57,23 @@ void Space::initialize()
 
 void Space::promoteSolution(uint index)
 {
+    assert(index < m_size);
+    assert(m_newSolutionsLastId < m_size);
+
     byte * solutionAtNewSpace = solutionFromNewSpaceAt(m_newSolutionsLastId);
     byte * solution = solutionAt(index);
     uint solutionSize = m_domain->solutionSize();
     ::memcpy(solutionAtNewSpace, solution, solutionSize);
     m_newSolutionsLastId++;
+}
+
+void Space::swap()
+{
+    byte * tmpPtr = m_solutions;
+    m_solutions = m_newSolutions;
+    m_newSolutions = tmpPtr;
+
+    m_newSolutionsLastId = 0;
 }
 
 void Space::createSolutions()

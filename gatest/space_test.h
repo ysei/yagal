@@ -40,4 +40,29 @@ TEST(TestSpace, testInitialize)
     }
 }
 
+TEST(TestSpace, testPromotion)
+{
+    Domain domain;
+    domain.add<int>(new ValueInitializer<int>(7));
+
+    Space space(&domain);
+    space.setSize(5);
+    space.initialize();
+
+    // Init solutions from 0 to 5
+    for(int i = 0; i < 5; i++) {
+        OneIntSolution * sol = (OneIntSolution *)space.solutionAt(i);
+        sol->n = i;
+    }
+
+    // Promote solutions one by one
+    for(int i = 0; i < 2; i++) {
+        OneIntSolution * sol = (OneIntSolution *)space.solutionFromNewSpaceAt(i);
+        sol->n = 0;
+
+        space.promoteSolution(i);
+        EXPECT_EQ(sol->n, i);
+    }
+}
+
 #endif // SPACE_TEST_H

@@ -48,11 +48,12 @@ protected:
     void performCrossover(uint solutionIndex);
     void performMutation(uint solutionIndex);
 
-    void crossover(byte * solutionDad, byte * solutionMom, uint point);
+    void promote(uint index);
 
 private:
     Space * m_space;
     SolutionScore * m_scores;
+    uint m_newSpaceSolutionId;
 
     float m_mutationProbability;
     float m_crossoverProbability;

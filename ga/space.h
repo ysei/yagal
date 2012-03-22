@@ -35,6 +35,8 @@ public:
 
     void initialize();
 
+    void promoteSolution(uint index);
+
 private:
     void createSolutions();
     void initializeSolutions();
@@ -44,6 +46,7 @@ private:
     unsigned int m_size;
     byte * m_solutions;
     byte * m_newSolutions;
+    uint m_newSolutionsLastId;
 };
 
 #endif // SPACE_H

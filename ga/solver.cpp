@@ -20,8 +20,9 @@ static int compareScores(const void * a, const void * b)
 }
 
 Solver::Solver(Space * space) : m_space(space), m_scores(NULL),
-    m_mutationProbability(0.01f), m_crossoverProbability(0.8f),
-    m_acceptableError(0.001f), m_iterations(1000)
+    m_newSpaceSolutionId(0), m_mutationProbability(0.01f),
+    m_crossoverProbability(0.8f), m_acceptableError(0.001f),
+    m_iterations(1000)
 {
     m_random = new Random;
 }
@@ -109,16 +110,13 @@ void Solver::performCrossover(uint solutionIndex)
         uint solutionSize = m_space->domain()->solutionSize();
 
         uint crossoverMate = m_random->gaussianUInt(m_space->size());
-        if(crossoverMate == solutionIndex) {
-            // Can't do crossover to itself, better luck next time
-            continue;
+        if(crossoverMate != solutionIndex) {
+            byte * solutionDad = m_space->solutionAt(solutionIndex);
+            byte * solutionMom = m_space->solutionAt(crossoverMate);
+            uint crossoverPoint = m_random->uniformInt<uint>(1, solutionSize);
+            Operators::crossover(solutionDad, solutionMom, solutionSize, crossoverPoint);
+            m_space->promoteSolution(solutionIndex);
         }
-
-        byte * solutionDad = m_space->solutionAt(solutionIndex);
-        byte * solutionMom = m_space->solutionAt(crossoverMate);
-        uint crossoverPoint = m_random->uniformInt(1, solutionSize);
-        Operators::crossover(solutionDad, solutionMom, solutionSize, crossoverPoint);
-        promote(solutionIndex);
     }
 }
 
@@ -128,13 +126,8 @@ void Solver::performMutation(uint solutionIndex)
         uint solutionSize = m_space->domain()->solutionSize();
 
         byte * solution = m_space->solutionAt(solutionIndex);
-        uint mutationPoint = m_random->uniformInt(1, solutionSize);
+        uint mutationPoint = m_random->uniformInt<uint>(1, solutionSize);
         Operators::mutation(solution, solutionSize, mutationPoint);
-        promote(solutionIndex);
+        m_space->promoteSolution(solutionIndex);
     }
-}
-
-void Solver::crossover(byte *solutionDad, byte *solutionMom, uint point)
-{
-
 }

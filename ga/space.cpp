@@ -6,7 +6,8 @@
 static const int DEFAULT_SIZE = 100;
 
 Space::Space(Domain *domain)
-    : m_domain(domain), m_solutions(NULL), m_newSolutions(NULL)
+    : m_domain(domain), m_solutions(NULL), m_newSolutions(NULL),
+      m_newSolutionsLastId(0)
 {
     setSize(DEFAULT_SIZE);
 }
@@ -54,22 +55,34 @@ void Space::initialize()
     initializeSolutions();
 }
 
+void Space::promoteSolution(uint index)
+{
+    byte * solutionAtNewSpace = solutionFromNewSpaceAt(m_newSolutionsLastId);
+    byte * solution = solutionAt(index);
+    uint solutionSize = m_domain->solutionSize();
+    ::memcpy(solutionAtNewSpace, solution, solutionSize);
+    m_newSolutionsLastId++;
+}
+
 void Space::createSolutions()
 {
-    assert(m_size > 0);    
+    assert(m_size > 0);
     assert(m_domain->solutionSize() > 0);
+
+    uint memoryAreaSize = size() * m_domain->solutionSize();
 
     if(m_solutions) {
         free(m_solutions);
     }
 
-    m_solutions = (byte *)malloc(size() * m_domain->solutionSize());
+    m_solutions = (byte *)malloc(memoryAreaSize);
 
     if(m_newSolutions) {
         free(m_newSolutions);
     }
 
-    m_newSolutions = (byte *)malloc(size() * m_domain->solutionSize());
+    m_newSolutions = (byte *)malloc(memoryAreaSize);
+    ::memset(m_newSolutions, 0, memoryAreaSize);
 }
 
 void Space::initializeSolutions()

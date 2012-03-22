@@ -32,6 +32,7 @@ TEST(SolverTest, tryApi)
     Solver * solver = new Solver(space);
 
     SquareFitness squareFitness;
+    UNUSED(solver);
     //solver->run(squareFitness);
 }
 

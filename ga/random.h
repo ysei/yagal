@@ -33,7 +33,7 @@ public:
     }
 
     bool prob(double probability) {
-        return m_randomImpl.prob(probability);
+        return m_randomImpl.Prob(probability);
     }
 
 private:
@@ -49,7 +49,7 @@ T Random::uniformInt()
 template <class T>
 T Random::uniformInt(int min, int max)
 {
-    m_randomImpl.IntegerC(min, max);
+    return m_randomImpl.IntegerC(min, max);
 }
 
 template <class T>

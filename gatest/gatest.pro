@@ -11,6 +11,7 @@ HEADERS += range_test.h \
     domain_test.h \
     space_test.h \
     common.h \
-    solver_test.h
+    solver_test.h \
+    random_test.h
 
 LIBS += -L ../lib -lyagal -lRandomLib

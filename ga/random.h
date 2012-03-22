@@ -20,7 +20,6 @@ public:
     template <class T>
     T uniformReal();
 
-
     uint gaussianUInt(uint max) {
         assert(max > 0);
 
@@ -31,6 +30,10 @@ public:
         }
 
         return max - 1;
+    }
+
+    bool prob(double probability) {
+        return m_randomImpl.prob(probability);
     }
 
 private:

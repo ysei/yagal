@@ -9,7 +9,8 @@ INCLUDEPATH = ..
 SOURCES += domain.cpp \
     space.cpp \
     solver.cpp \
-    random.cpp
+    random.cpp \
+    operators.cpp
 
 
 TARGET = ../lib/yagal
@@ -25,4 +26,5 @@ HEADERS += \
     random.h \
     types.h \
     domain.inl \
-    initializer.h
+    initializer.h \
+    operators.h

@@ -6,7 +6,7 @@
 static const int DEFAULT_SIZE = 100;
 
 Space::Space(Domain *domain)
-    : m_domain(domain), m_solutions(NULL), m_newSolutions(NULL);
+    : m_domain(domain), m_solutions(NULL), m_newSolutions(NULL)
 {
     setSize(DEFAULT_SIZE);
 }

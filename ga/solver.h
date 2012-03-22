@@ -45,8 +45,8 @@ protected:
     void calculateFitness(const Fitness &fitness);
     void step(const Fitness & fitness);
     void sortScores();
-    void performCrossover();
-    void performMutation();
+    void performCrossover(uint solutionIndex);
+    void performMutation(uint solutionIndex);
 
     void crossover(byte * solutionDad, byte * solutionMom, uint point);
 

@@ -41,6 +41,7 @@ public:
 private:
     void createSolutions();
     void initializeSolutions();
+    void fillRestOfNewSpaceWithRandomSolutions();
 
 private:
     Domain * m_domain;

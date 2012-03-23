@@ -23,11 +23,12 @@ public:
         ulong crossovers;
         float bestScore;
         uint bestSolutionIndex;
+        byte * bestSolution;
     };
 
     struct SolutionScore {
         float fitness;
-        uint solutionIndex;
+        uint solutionIndex;        
     };
 
     Solver(Space * space);
@@ -40,6 +41,8 @@ public:
 
     void run(const Fitness& fitness);
 
+    const SolverStatistics& stats() const;
+
 protected:
     void initialize();
     void calculateFitness(const Fitness &fitness);
@@ -49,6 +52,9 @@ protected:
     void performMutation(uint solutionIndex);
 
     void promote(uint index);
+
+private:
+    void updateBestSolution();
 
 private:
     Space * m_space;

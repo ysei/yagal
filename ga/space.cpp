@@ -104,3 +104,11 @@ void Space::initializeSolutions()
         m_domain->initialize(solution);
     }
 }
+
+void Space::fillRestOfNewSpaceWithRandomSolutions()
+{
+    for(uint i = m_newSolutionsLastId; i < size(); i++) {
+        byte * solution = solutionFromNewSpaceAt(i);
+        m_domain->initialize(solution);
+    }
+}

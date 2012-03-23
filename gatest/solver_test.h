@@ -18,7 +18,7 @@ public:
         UNUSED(domain);
 
         const SquareParams * params = (const SquareParams *) solution;
-        return -((params->x * params->y) + (params->x * params->y));
+        return ((params->x * params->x) + (params->y * params->y));
     }
 };
 
@@ -31,9 +31,10 @@ TEST(SolverTest, tryApi)
     Space * space = new Space(domain);
     Solver * solver = new Solver(space);
 
-    SquareFitness squareFitness;
-    UNUSED(solver);
-    //solver->run(squareFitness);
+    SquareFitness squareFitness;    
+    solver->run(squareFitness);
+    SquareParams * bestParams = (SquareParams *) solver->stats().bestSolution;
+    printf("Best Score: %f, x = %f, y = %f\n", solver->stats().bestScore, bestParams->x, bestParams->y);
 }
 
 #endif // SOLVER_TEST_H

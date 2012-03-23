@@ -11,9 +11,9 @@ static int compareScores(const void * a, const void * b)
     float valA = ((Solver::SolutionScore*)a)->fitness;
     float valB = ((Solver::SolutionScore*)b)->fitness;
     if(valA < valB) {
-        return -1;
-    } else if(valA > valB) {
         return 1;
+    } else if(valA > valB) {
+        return -1;
     }
 
     return 0;
@@ -25,6 +25,7 @@ Solver::Solver(Space * space) : m_space(space), m_scores(NULL),
     m_iterations(1000)
 {
     m_random = new Random;
+    m_stats.bestSolution = NULL;
 }
 
 Solver::~Solver()
@@ -34,6 +35,11 @@ Solver::~Solver()
     }
 
     delete m_random;
+
+
+    if(m_stats.bestSolution) {
+        free(m_stats.bestSolution);
+    }
 }
 
 void Solver::setMutationProbability(float probability)
@@ -65,6 +71,11 @@ void Solver::run(const Fitness & fitness)
     }
 }
 
+const Solver::SolverStatistics &Solver::stats() const
+{
+    return m_stats;
+}
+
 void Solver::initialize()
 {
     if(m_scores) {
@@ -74,6 +85,14 @@ void Solver::initialize()
     m_scores = (SolutionScore *)malloc(m_space->size() * sizeof(SolutionScore));
 
     m_space->initialize();
+
+    if(m_stats.bestSolution) {
+        free(m_stats.bestSolution);
+    }
+
+    ::memset(&m_stats, 0, sizeof(SolverStatistics));
+
+    m_stats.bestSolution = (byte *) malloc(m_space->domain()->solutionSize());
 }
 
 void Solver::calculateFitness(const Fitness & fitness)
@@ -90,13 +109,14 @@ void Solver::step(const Fitness &fitness)
 {
     calculateFitness(fitness);
     sortScores();
-
-
+    updateBestSolution();
 
     for(uint i = 0; i < m_space->size(); i++) {
         performCrossover(i);
         performMutation(i);
     }
+
+    m_space->swap();
 }
 
 void Solver::sortScores()
@@ -106,11 +126,12 @@ void Solver::sortScores()
 
 void Solver::performCrossover(uint solutionIndex)
 {
-    if(m_random->prob(m_crossoverProbability)) {
+    if(m_random->prob(m_crossoverProbability)) {        
         uint solutionSize = m_space->domain()->solutionSize();
 
-        uint crossoverMate = m_random->gaussianUInt(m_space->size());
+        uint crossoverMate = m_scores[m_random->gaussianUInt(m_space->size())].solutionIndex;
         if(crossoverMate != solutionIndex) {
+            m_stats.crossovers++;
             byte * solutionDad = m_space->solutionAt(solutionIndex);
             byte * solutionMom = m_space->solutionAt(crossoverMate);
             uint crossoverPoint = m_random->uniformInt<uint>(1, solutionSize);
@@ -123,11 +144,20 @@ void Solver::performCrossover(uint solutionIndex)
 void Solver::performMutation(uint solutionIndex)
 {
     if(m_random->prob(m_mutationProbability)) {
+        m_stats.mutations++;
         uint solutionSize = m_space->domain()->solutionSize();
 
         byte * solution = m_space->solutionAt(solutionIndex);
         uint mutationPoint = m_random->uniformInt<uint>(1, solutionSize);
         Operators::mutation(solution, solutionSize, mutationPoint);
         m_space->promoteSolution(solutionIndex);
+    }
+}
+
+void Solver::updateBestSolution()
+{
+    if(m_scores[0].fitness < m_stats.bestScore) {
+        m_stats.bestScore = m_scores[0].fitness;
+        ::memcpy(m_stats.bestSolution, m_space->solutionAt(m_scores[0].solutionIndex), m_space->domain()->solutionSize());
     }
 }

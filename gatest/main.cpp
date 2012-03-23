@@ -4,6 +4,7 @@
 #include "space_test.h"
 #include "solver_test.h"
 #include "random_test.h"
+#include "operators_test.h"
 
 int main(int argc, char ** argv)
 {
